@@ -1,13 +1,12 @@
 package br.ufc.demo1.author;
 
-import lombok.Data;
+import br.ufc.demo1.pubs.Pubs;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+
 
 /**
  * Created by emerson on 17/07/17.
@@ -24,6 +23,19 @@ public class Author implements Serializable{
     private String firstName;
     @NotBlank(message = "O segundo nome não pode ser em branco")
     private String lastName;
+
+    @OneToMany
+    @JoinTable(name = "author_pub",
+    joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "pub_id"))
+    private List<Pubs> pubsList;
+
+    public List<Pubs> getPubsList() {
+        return pubsList;
+    }
+
+    public void setPubsList(List<Pubs> pubsList) {
+        this.pubsList = pubsList;
+    }
 
     public Author(){}
 
