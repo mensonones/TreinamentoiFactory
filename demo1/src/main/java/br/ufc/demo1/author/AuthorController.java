@@ -34,7 +34,7 @@ public class AuthorController {
         return new ResponseEntity<Author>(headers, HttpStatus.CREATED);
     }
     //atualiza autor por id
-    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/author/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> updateAuthor(@PathVariable Integer id, @RequestBody Author author){
         Author existingAuthor = authorService.getById(id);
         if(existingAuthor == null){
@@ -48,7 +48,7 @@ public class AuthorController {
     }
 
     //retorna autor por id
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/author/{id}", method = RequestMethod.GET)
     public ResponseEntity<Author> getAuthor(@PathVariable("id") Integer id){
         Author author = authorService.getById(id);
         if(author == null){
@@ -59,7 +59,7 @@ public class AuthorController {
     }
 
     //deleta autor por id
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/author/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteAuthor(@PathVariable("id") Integer id){
         Author author = authorService.getById(id);
         if(author == null){

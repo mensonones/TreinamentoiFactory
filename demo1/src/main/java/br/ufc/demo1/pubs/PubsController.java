@@ -18,12 +18,14 @@ public class PubsController {
     @Autowired
     private PubsServiceImpl pubsService;
 
+    //retorna todas as publicações
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Pubs>> getAllPubs(){
         Iterable<Pubs> pubs = pubsService.findAll();
         return new ResponseEntity<Iterable<Pubs>>(pubs, HttpStatus.OK);
     }
 
+    //cria uma publicação
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Pubs> createPub(@RequestBody Pubs pub, UriComponentsBuilder ucBuilder){
         pubsService.save(pub);
@@ -32,7 +34,8 @@ public class PubsController {
         return new ResponseEntity<Pubs>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    //atualiza uma publicação por id
+    @RequestMapping(value = "/pub/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> updatePub(@PathVariable Integer id, @RequestBody Pubs pub){
         Pubs existingPub = pubsService.getById(id);
         if(existingPub == null){
@@ -47,7 +50,8 @@ public class PubsController {
 
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    //retorna publicação por id
+    @RequestMapping(value = "/pub/{id}", method = RequestMethod.GET)
     public ResponseEntity<Pubs> getPub(@PathVariable("id") Integer id){
         Pubs pub = pubsService.getById(id);
         if(pub == null){
@@ -57,7 +61,8 @@ public class PubsController {
         }
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    //delete publicação por id
+    @RequestMapping(value = "/pub/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deletePub(@PathVariable("id") Integer id){
         Pubs pub = pubsService.getById(id);
         if(pub == null){
@@ -67,4 +72,5 @@ public class PubsController {
             return new ResponseEntity<Void>(HttpStatus.GONE);
         }
     }
+
 }

@@ -1,5 +1,8 @@
 package br.ufc.demo1.pubs;
 
+import org.springframework.data.jpa.repository.Query;
+
+
 /**
  * Created by emerson on 18/07/17.
  */

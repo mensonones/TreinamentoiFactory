@@ -32,4 +32,5 @@ public class PubsServiceImpl implements PubsService {
         pubsRepository.delete(id);
         return true;
     }
+
 }
