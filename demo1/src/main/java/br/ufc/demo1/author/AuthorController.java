@@ -1,10 +1,11 @@
 package br.ufc.demo1.author;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.util.UriComponentsBuilder;
 
 
 /**
@@ -25,9 +26,12 @@ public class AuthorController {
     }
     //cria um autor
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Author> createAuthor(@RequestBody Author author){
+    public ResponseEntity<Author> createAuthor(@RequestBody Author author, UriComponentsBuilder ucBuilder){
         authorService.save(author);
-        return new ResponseEntity<Author>(author, HttpStatus.CREATED);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/authors/{id}").buildAndExpand(author.getId()).toUri());
+
+        return new ResponseEntity<Author>(headers, HttpStatus.CREATED);
     }
     //atualiza autor por id
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
