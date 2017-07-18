@@ -2,7 +2,6 @@ package br.ufc.demo1.author;
 
 import br.ufc.demo1.pubs.Pubs;
 import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -26,7 +25,7 @@ public class Author implements Serializable{
 
     @OneToMany
     @JoinTable(name = "author_pub",
-    joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "pub_id"))
+            joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "pub_id"))
     private List<Pubs> pubsList;
 
     public List<Pubs> getPubsList() {
