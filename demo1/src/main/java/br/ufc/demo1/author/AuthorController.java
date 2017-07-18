@@ -30,18 +30,21 @@ public class AuthorController {
         return new ResponseEntity<Author>(author, HttpStatus.CREATED);
     }
     //atualiza autor por id
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateAuthor(@RequestBody Author author){
-        Author existingAuthor = authorService.getById(author.getId());
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> updateAuthor(@PathVariable Integer id, @RequestBody Author author){
+        Author existingAuthor = authorService.getById(id);
         if(existingAuthor == null){
             return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         }else{
+            existingAuthor.setFirstName(author.getFirstName());
+            existingAuthor.setLastName(author.getLastName());
             authorService.save(author);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }
     }
 
     //retorna autor por id
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ResponseEntity<Author> getAuthor(@PathVariable("id") Integer id){
         Author author = authorService.getById(id);
         if(author == null){
