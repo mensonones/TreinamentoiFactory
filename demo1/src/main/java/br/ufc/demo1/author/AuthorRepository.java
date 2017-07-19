@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by LuizI on 17/07/2017.
+ * Created by emerson on 17/07/2017.
  */
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Integer>{

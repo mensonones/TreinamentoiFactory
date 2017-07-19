@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 /**
- * Created by LuizI on 17/07/2017.
+ * Created by emerson on 17/07/2017.
  */
 @Entity(name = "author")
 public class Author {

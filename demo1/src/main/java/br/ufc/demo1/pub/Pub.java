@@ -4,9 +4,10 @@ import br.ufc.demo1.author.Author;
 import br.ufc.demo1.publisher.Publisher;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
- * Created by LuizI on 18/07/2017.
+ * Created by emerson on 18/07/2017.
  */
 @Entity(name = "publications")
 public class Pub {
@@ -17,6 +18,10 @@ public class Pub {
     private String name;
     @Column
     private Tipo tipo;
+
+    @Column(columnDefinition = "DATE DEFAULT CURRENT_DATE")
+    private Date createdAt;
+
     @ManyToOne
     private Author author;
     @ManyToOne
