@@ -1,54 +1,41 @@
 package br.ufc.demo1.author;
 
-import br.ufc.demo1.pubs.Pubs;
-import org.hibernate.validator.constraints.NotBlank;
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
+import br.ufc.demo1.pub.Pub;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by emerson on 17/07/17.
+ * Created by LuizI on 17/07/2017.
  */
-@Entity
-public class Author implements Serializable{
-
-    private static final int serialVersionUID = (int) 1L;
-
+@Entity(name = "author")
+public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @NotBlank(message = "O primeiro nome não pode ser em branco")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Column
     private String firstName;
-    @NotBlank(message = "O segundo nome não pode ser em branco")
+    @Column
     private String lastName;
 
-    @OneToMany
-    @JoinTable(name = "author_pub",
-            joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "pub_id"))
-    private List<Pubs> pubsList;
+    @OneToMany(mappedBy = "author")
+    @JsonIgnore
+    private Collection<Pub> publications;
 
-    public List<Pubs> getPubsList() {
-        return pubsList;
+    public Author(){
+
     }
-
-    public void setPubsList(List<Pubs> pubsList) {
-        this.pubsList = pubsList;
-    }
-
-    public Author(){}
-
-    public Author(Integer id, String firstName, String lastName) {
+    public Author(int id, String firstName, String lastName){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -66,5 +53,13 @@ public class Author implements Serializable{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Collection<Pub> getPublications() {
+        return publications;
+    }
+
+    public void setPublications(Collection<Pub> publications) {
+        this.publications = publications;
     }
 }

@@ -2,8 +2,11 @@ package br.ufc.demo1;
 
 import br.ufc.demo1.author.Author;
 import br.ufc.demo1.author.AuthorRepository;
-import br.ufc.demo1.pubs.Pubs;
-import br.ufc.demo1.pubs.PubsRepository;
+import br.ufc.demo1.pub.Pub;
+import br.ufc.demo1.pub.PubRepository;
+import br.ufc.demo1.pub.Tipo;
+import br.ufc.demo1.publisher.Publisher;
+import br.ufc.demo1.publisher.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +27,10 @@ public class Demo1Application {
 	private AuthorRepository authorRepository;
 
 	@Autowired
-	private PubsRepository pubsRepository;
+	private PubRepository pubsRepository;
+
+	@Autowired
+	private PublisherRepository publisherRepository;
 
 	@PostConstruct
 	@Transactional
@@ -35,11 +41,22 @@ public class Demo1Application {
 		emerson.setLastName("Vieira");
 		authorRepository.save(emerson);
 
-		Pubs primeiro = new Pubs();
-		primeiro.setNamePub("Teste pub");
-		primeiro.setContentPub("TESTANDO PUB");
+		Publisher publisher = new Publisher();
+		publisher.setName("Novatec");
+		publisher.setDescription("Editora Brasileira");
+		publisher.setWebsite("novatec.com.br");
+		publisherRepository.save(publisher);
+
+		Pub pub = new Pub();
+		pub.setTipo(Tipo.LIVRO);
+		pub.setAuthor(emerson);
+		pub.setPublisher(publisher);
+		pubsRepository.save(pub);
+		/*Pub primeiro = new Pub();
+		primeiro.setName("Teste pub");
+		primeiro.setTipo();
 		primeiro.setAuthorPub(emerson);
-		pubsRepository.save(primeiro);
+		pubsRepository.save(primeiro);*/
 	}
 
 }
