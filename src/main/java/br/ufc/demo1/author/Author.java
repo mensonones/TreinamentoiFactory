@@ -18,6 +18,8 @@ public class Author {
     private String firstName;
     @Column
     private String lastName;
+    @Column
+    private String email;
 
     @OneToMany(mappedBy = "author")
     @JsonIgnore
@@ -26,10 +28,11 @@ public class Author {
     public Author(){
 
     }
-    public Author(int id, String firstName, String lastName){
+    public Author(int id, String firstName, String lastName, String email){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
     }
     public int getId() {
         return id;
@@ -53,6 +56,14 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Collection<Pub> getPublications() {

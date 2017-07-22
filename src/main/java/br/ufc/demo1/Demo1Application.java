@@ -38,6 +38,7 @@ public class Demo1Application {
 		Author emerson = new Author();
 		emerson.setFirstName("Emerson");
 		emerson.setLastName("Vieira");
+		emerson.setEmail("mensones.1@gmail.com");
 		authorRepository.save(emerson);
 
 		Publisher publisher = new Publisher();
