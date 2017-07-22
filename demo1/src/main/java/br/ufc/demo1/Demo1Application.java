@@ -10,11 +10,10 @@ import br.ufc.demo1.publisher.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.util.Date;
+
 
 @SpringBootApplication
 public class Demo1Application {
